@@ -273,7 +273,9 @@ public class Consumer {
 
 ![Alt text](./1492422639610.png)
 
-下载dubbo-admin，可自行根据网上介绍安装。大致做法就是将dubbo-admin中 的某个文件夹内容替换到tomcat的conf中，再运行tomcat即可。
+下载dubbo-admin，可自行根据网上介绍安装。大致做法就是将dubbo-admin用maven打包后放到tomcat中，修改dubbo.properties。
+![Alt text](./1492175831009.png)
+![Alt text](./1492175831010.png)
 
 成功开启输入用户名密码root后，即可进入控制台首页查看消费者提供者情况：
 查看提供者：
