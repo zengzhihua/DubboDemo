@@ -175,7 +175,7 @@ public class DemoServiceImpl implements DemoService {
 ```
 
 需加入公共接口所在的依赖
-![Alt text](./1492409216786.png)
+![Alt text](./1492175831008.png)
 
 用Spring配置声明暴露服务
 
