@@ -5,12 +5,12 @@ Dubbo开始于电商系统，因此在这里先从电商系统的**演变**讲�
 **缺点**：单一的系统架构，使得在开发过程中，占用的资源越来越多，而且随着流量的增加越来越难以维护
 ![Alt text](./1492160801203.png)
 2. 垂直应用框架(MVC)
-	垂直应用架构解决了单一应用架构所面临的扩容问题，流量能够分散到各个子系统当中，且系统的体积可控，一定程度上降低了开发人员之间协同以及维护的成本，提升了开发效率。
-	**缺点**：但是在垂直架构中相同逻辑代码需要不断的复制，不能复用。
+  垂直应用架构解决了单一应用架构所面临的扩容问题，流量能够分散到各个子系统当中，且系统的体积可控，一定程度上降低了开发人员之间协同以及维护的成本，提升了开发效率。
+  **缺点**：但是在垂直架构中相同逻辑代码需要不断的复制，不能复用。
 ![Alt text](./1492161321884.png)
 
 3. 分布式应用架构(RPC)
-	当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心
+  当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心
 ![Alt text](./1492161354130.png)
 
 4.  流动计算架构(SOA)
@@ -19,18 +19,18 @@ Dubbo开始于电商系统，因此在这里先从电商系统的**演变**讲�
 从以上是电商系统的演变可以看出架构演变的过程：
 ![Alt text](./1492161516588.png)
 * 单一应用架构
-	* 当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。
+  * 当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。
  * 此时，用于简化增删改查工作量的 数据访问框架(ORM) 是关键。
  
 * 垂直应用架构
  * 当访问量逐渐增大，单一应用增加机器带来的加速度越来越小，将应用拆成互不相干的几个应用，以提升效率。
  * 此时，用于加速前端页面开发的 Web框架(MVC) 是关键。
 * 分布式服务架构
-	*  当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，使前端应用能更快速的响应多变的市场需求。
-	*  此时，用于提高业务复用及整合的 分布式服务框架(RPC) 是关键。
+  *  当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，使前端应用能更快速的响应多变的市场需求。
+  *  此时，用于提高业务复用及整合的 分布式服务框架(RPC) 是关键。
 * 流动计算架构
-	*  当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。
-	*  此时，用于提高机器利用率的 资源调度和治理中心(SOA) 是关键。
+  *  当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。
+  *  此时，用于提高机器利用率的 资源调度和治理中心(SOA) 是关键。
 
 ---
 在这里插播一条关于RPC的简介：
@@ -119,11 +119,11 @@ Dubbo-admin与Dubbo-monitor提供了完善的服务接口管理与监控功能�
 Dubbo能与Zookeeper做到集群部署，当提供者出现断电等异常停机时，Zookeeper注册中心能自动删除提供者信息，当提供者重启时，能自动恢复注册数据，以及订阅请求
 
 具体的安装方法在此不一一叙述，可参考博文：
-http://blog.csdn.net/tlk20071/article/details/52028945
+https://www.cnblogs.com/haippy/archive/2012/07/19/2599989.html
 
 安装完成后，进入到bin目录，并且启动zkServer.cmd，这个脚本中会启动一个java进程：
 (注：需要先启动zookeeper后，后续dubbo demo代码运行才能使用zookeeper注册中心的功能)
-![Alt text](./1492175831002.png)
+![Alt text](./1492175831003.png)
 
 
 2 创建MAVEN项目
@@ -132,7 +132,7 @@ http://blog.csdn.net/tlk20071/article/details/52028945
 dubbo-api : 存放公共接口；
 dubbo-consumer :　调用远程服务；
 dubbo-provider : 提供远程服务。
-![Alt text](./1492408015354.png)
+![Alt text](./1492175831004.png)
 
 下面将详细叙述代码构建过程。
 1) 首先构建MAVEN项目，导入所需要的jar包依赖。
@@ -142,7 +142,7 @@ dubbo-provider : 提供远程服务。
 
 2)创建dubbo-api的MAVEN项目(有独立的pom.xml，用来打包供提供者消费者使用)。
 在项目中定义服务接口：该接口需单独打包，在服务提供方和消费方共享。
-![Alt text](./1492408198605.png)
+![Alt text](./1492175831005.png)
 
 ```
 package com.alibaba.dubbo.demo;
@@ -191,7 +191,8 @@ public class DemoServiceImpl implements DemoService {
     <!--定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识-->
     <dubbo:application name="demotest-provider" owner="programmer" organization="dubbox"/>
     <!--使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper-->
-    <dubbo:registry address="zookeeper://localhost:2181"/>
+    <!--<dubbo:registry address="zookeeper://localhost:2181"/>-->
+    <dubbo:registry  protocol="zookeeper"  address="192.168.83.129:2181,192.168.83.129:2182,192.168.83.129:2183"  />
     <!-- 用dubbo协议在20880端口暴露服务 -->
     <dubbo:protocol name="dubbo" port="20880" />
     <!--使用 dubbo 协议实现定义好的 api.PermissionService 接口-->
@@ -231,7 +232,8 @@ public class Provider {
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <dubbo:application name="demotest-consumer" owner="programmer" organization="dubbox"/>
     <!--向 zookeeper 订阅 provider 的地址，由 zookeeper 定时推送-->
-    <dubbo:registry address="zookeeper://localhost:2181"/>
+    <!--<dubbo:registry address="zookeeper://localhost:2181"/>-->
+    <dubbo:registry  protocol="zookeeper"  address="192.168.83.129:2181,192.168.83.129:2182,192.168.83.129:2183"  />
     <!--使用 dubbo 协议调用定义好的 api.PermissionService 接口-->
     <dubbo:reference id="permissionService" interface="com.alibaba.dubbo.demo.DemoService"/>
 </beans>
@@ -257,9 +259,9 @@ public class Consumer {
 ```
 5）运行项目，先确保provider已被运行后再启动consumer模块：
 运行提供者：
-![Alt text](./1492422470086.png)
+![Alt text](./1492175831006.png)
 消费者成功调用提供者所提供的远程服务：
-![Alt text](./1492422491491.png)
+![Alt text](./1492175831007.png)
 
 当然，这只是一个模拟的项目，实际中有多提供者多消费者情况，比这要复杂的多，当然只有这样才能体现dubbo的特性。
 
@@ -271,54 +273,10 @@ public class Consumer {
 
 ![Alt text](./1492422639610.png)
 
-下载dubbo-admin，可自行根据网上介绍安装。大致做法就是将dubbo-admin中 的某个文件夹内容替换到tomcat的conf中，再运行tomcat即可。但我在实际操作中发现JDK8无法运行，后来找到一个JDK8可以实现的dubbo-admin版本，如有需要可留下邮箱索要。
+下载dubbo-admin，可自行根据网上介绍安装。大致做法就是将dubbo-admin中 的某个文件夹内容替换到tomcat的conf中，再运行tomcat即可。
 
 成功开启输入用户名密码root后，即可进入控制台首页查看消费者提供者情况：
 查看提供者：
 ![Alt text](./1492422912493.png)
 查看消费者：
 ![Alt text](./1492422960059.png)
-
-很遗憾，官方Dubbo网址早已不维护了，也出现了很多更新的Dubbo，比如当当网的Dubbox，可以自行了解。
-
-整个项目的代码已经上传到我的github上，欢迎查看。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-参考：https://www.zhihu.com/question/25536695
-# DubboDemo
-# DatatablesDemo
